@@ -1,0 +1,16 @@
+{
+  "name": "birdrepo",
+  "version": "1.0.0",
+  "description": "Simple bird search app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aldrin Navarro",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "express": "^4.14.0",
+    "request": "^2.74.0"
+  }
+}
