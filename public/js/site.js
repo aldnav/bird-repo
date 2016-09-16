@@ -24,6 +24,10 @@ $(document).on('click', '.results a', function(e) {
 });
 
 // receive the results
+var mclResults;
+var loaded = 0;
+var loadSize = 12;
+var maxCount = 120;
 socket.on('search:results', function(data) {
     $('.preloader-col').animateCss('zoomOut fadeOut');
     setTimeout(function() {
@@ -39,21 +43,54 @@ socket.on('search:results', function(data) {
             $('.results').empty().append(data.result);
         } else if (data.library === 'mcl') {
             // mcl resources
-            console.log('MCL:\t', data);
-            var loadSize = 10;
+            $('.mcl-row').empty();
             if (data.results.count > 0) {
-                for (var i = 0; i < loadSize; i++) {
-                    var dataObj = data.results.content[i];
-                    var template = $('<div class="col s4"></div>');
-                    if (dataObj.mediaType === 'Photo') {
-                        // template.append('<img class="responsive-img" src="'+ dataObj.previewUrl +'"></img>');
-                        template.append('<card></card>');
-                    }
-                    $('.mcl-row').append(template);
-                }
+                mclResults = data.results;
+                loaded = 0;
+                fetchRenderMCL();
             }
         }
     }
+});
+
+/**
+ * Fetches from the mclResults and renders template
+ */
+function fetchRenderMCL() {
+    if (mclResults && mclResults.count > 0 && loaded < mclResults.count &&
+        loaded < maxCount) {
+        var hasMaxed = false;
+        for (var i = loaded, j = 0; j < loadSize; i++) {
+            var dataObj = mclResults.content[i];
+            if (dataObj === undefined) {
+                hasMaxed = true;
+                break;
+            }
+            dataObj.isAudio = dataObj.mediaType === 'Audio';
+            dataObj.isPhoto = dataObj.mediaType === 'Photo';
+            var template = null;
+            var rendered = null;
+            template = $('#mcl-card').html();
+            rendered = Mustache.render(template, dataObj);
+            if (template !== null) {
+                $('.mcl-row').append(rendered);
+            }
+            loaded++;
+            j++;
+        }
+        if (loaded < mclResults.count && loaded < maxCount && !hasMaxed) {
+            $('#load-more-btn').removeClass('hide disabled').show();
+        } else {
+            $('#load-more-btn').hide();
+        }
+    } else {
+        $('#load-more-btn').hide();
+    }
+}
+
+$(document).on('click', '#load-more-btn', function(e) {
+    $('#load-more-btn').addClass('disabled');
+    fetchRenderMCL();
 });
 
 // offline
