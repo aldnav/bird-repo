@@ -61,3 +61,8 @@ table.infobox {
 .card {
     float: left;
 }
+
+video {
+  width: 100%    !important;
+  height: auto   !important;
+}
