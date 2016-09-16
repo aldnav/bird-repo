@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="static/css/animate.css">
         <link rel="stylesheet" href="static/css/materialize.min.css">
         <link rel="stylesheet" href="static/css/app.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body>
         <div class="container">
@@ -74,10 +75,66 @@
             </div>
             <div class="row mcl-row">
             </div>
+            <div class="row mcl-load-more">
+                <div class="col s4 offset-s5">
+                    <a class="waves-effect waves-light btn hide" id="load-more-btn">Load More</a>
+                </div>
+            </div>
         </div>
     </body>
     <script type="text/javascript" src="static/js/jquery-3.1.0.min.js"></script>
     <script type="text/javascript" src="static/js/materialize.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="static/js/mustache.min.js"></script>
     <script type="text/javascript" src="static/js/site.js"></script>
+    <script id="mcl-card" type="x-tmpl-mustache">
+        <div class="col s4">
+            <div class="card small sticky-action">
+                <div class="card-image waves-effect waves-block waves-light">
+                    {{#isPhoto}}
+                    <img class="activator" src="{{ previewUrl }}">
+                    {{/isPhoto}}
+                    {{#isAudio}}
+                    <video controls poster="{{ previewUrl }}" width="412" height="180">
+                          <source src="{{ mediaUrl }}" type="audio/mpeg">
+                          Your browser doesn't support HTML5 video tag.
+                        </video>
+                    {{/isAudio}}
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">{{ commonName }}<i class="material-icons right">more_vert</i></span>
+                </div>
+                <div class="card-action">
+                    <a href="{{ specimenUrl }}">MCL Resource</a>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">{{ commonName }}<i class="material-icons right">close</i></span>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>SciName</td>
+                                <td>{{ sciName }}</td>
+                            </tr>
+                            <tr>
+                                <td>Age</td>
+                                <td>{{ age }}{{^age}}N/A{{/age}}</td>
+                            </tr>
+                            <tr>
+                                <td>Sex</td>
+                                <td>{{ sex }}{{^sex}}N/A{{/sex}}</td>
+                            </tr>
+                            <tr>
+                                <td>Location</td>
+                                <td>{{ location }}{{^location}}N/A{{/location}}</td>
+                            </tr>
+                            <tr>
+                                <td>By</td>
+                                <td>{{ userDisplayName }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </script>
 </html>

@@ -16,10 +16,6 @@ body {
     transition: background 2s linear;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-}
-
 .spacer {
     height: 220px;
     transition: height 0.5s ease;
@@ -60,4 +56,8 @@ h1, h2, h3, h4, h5, h6 {
 
 table.infobox {
     margin: 0 auto;
+}
+
+.card {
+    float: left;
 }
