@@ -39,9 +39,14 @@ socket.on('search:results', function(data) {
     if (data) {
         if (data.library === 'wikipedia') {
             // wiki results first
-            if (data.result.strip().length() > 0 ) {
-                $('.results').removeClass('hide').animateCss('fadeInUp');
+            if (data.result.trim().length > 0 ) {
+                $('.results').removeClass('hide').show().animateCss('fadeInUp');
                 $('.results').empty().append(data.result);
+            } else {
+                $('.results').animateCss('fadeOutDown');
+                setTimeout(function() {
+                    $('.results').empty().addClass('hide');
+                }, 100);
             }
         } else if (data.library === 'mcl') {
             // mcl resources
