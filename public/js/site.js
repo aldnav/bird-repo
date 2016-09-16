@@ -39,8 +39,10 @@ socket.on('search:results', function(data) {
     if (data) {
         if (data.library === 'wikipedia') {
             // wiki results first
-            $('.results').removeClass('hide').animateCss('fadeInUp');
-            $('.results').empty().append(data.result);
+            if (data.result.strip().length() > 0 ) {
+                $('.results').removeClass('hide').animateCss('fadeInUp');
+                $('.results').empty().append(data.result);
+            }
         } else if (data.library === 'mcl') {
             // mcl resources
             $('.mcl-row').empty();
