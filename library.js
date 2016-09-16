@@ -16,7 +16,7 @@ function libSearch(keyword, mediaType, callback) {
         mediaType = null;
     }
     var kw = keyword ? keyword : 'king penguin';
-    var query = {'q': kw};
+    var query = {'q': kw, 'count': 120};
     if (mediaType && typeof mediaType !== 'undefined' &&
         (mediaType === 'Audio' || mediaType === 'Video')) {
         query.mediaType = mediaType;
