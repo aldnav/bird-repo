@@ -5,14 +5,79 @@
         <title>Bird Repository</title>
         <link rel="stylesheet" href="static/css/normalize.css">
         <link rel="stylesheet" href="static/css/animate.css">
+        <link rel="stylesheet" href="static/css/materialize.min.css">
         <link rel="stylesheet" href="static/css/app.css">
     </head>
     <body>
-        <h2>Search for a bird...</h2>
-        <input type="text" class="text">
-        <div class="results"></div>
+        <div class="container">
+            <div class="spacer"></div>
+            <div class="row">
+                <div class="col s6 offset-s3">
+                    <div class="search-box z-depth-1">
+                        <div class="input-field">
+                            <input type="text" class="text" id="search">
+                            <label for="search">Looking for birds?</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- SPINNER -->
+                <div class="col s2 offset-s5 preloader-col">
+                    <div class="preloader-wrapper preloader">
+                      <div class="spinner-layer spinner-blue">
+                        <div class="circle-clipper left">
+                          <div class="circle"></div>
+                        </div><div class="gap-patch">
+                          <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                          <div class="circle"></div>
+                        </div>
+                      </div>
+
+                      <div class="spinner-layer spinner-red">
+                        <div class="circle-clipper left">
+                          <div class="circle"></div>
+                        </div><div class="gap-patch">
+                          <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                          <div class="circle"></div>
+                        </div>
+                      </div>
+
+                      <div class="spinner-layer spinner-yellow">
+                        <div class="circle-clipper left">
+                          <div class="circle"></div>
+                        </div><div class="gap-patch">
+                          <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                          <div class="circle"></div>
+                        </div>
+                      </div>
+
+                      <div class="spinner-layer spinner-green">
+                        <div class="circle-clipper left">
+                          <div class="circle"></div>
+                        </div><div class="gap-patch">
+                          <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                          <div class="circle"></div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="results results-wiki hide z-depth-1"></div>
+                </div>
+            </div>
+            <div class="row mcl-row">
+            </div>
+        </div>
     </body>
     <script type="text/javascript" src="static/js/jquery-3.1.0.min.js"></script>
+    <script type="text/javascript" src="static/js/materialize.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="static/js/site.js"></script>
 </html>

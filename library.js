@@ -31,6 +31,7 @@ function libSearch(keyword, mediaType, callback) {
             return;
         }
         var obj = JSON.parse(body);
+        obj.library = 'mcl';
         if (typeof callback === 'function') {
             callback(obj);
         }
@@ -58,12 +59,20 @@ function wikiSearch(keyword, format, callback) {
             return;
         }
         var obj = JSON.parse(body);
-        var $ = cheerio.load(obj.parse.text['*']);
-        var result = {};
-        if (format === 'html') {
-            result.result = $.html($('#toc').prevAll());
-        } else {
-            result.result = $('#toc').prevAll().text();
+        var hasError = false;
+        var $;
+        try {
+            $ = cheerio.load(obj.parse.text['*']);
+        } catch (e) {
+            hasError = true;
+        }
+        var result = {library: 'wikipedia'};
+        if (!hasError) {
+            if (format === 'html') {
+                result.result = $.html($('#toc').prevAll());
+            } else {
+                result.result = $('#toc').prevAll().text();
+            }
         }
         if (typeof callback === 'function') {
             callback(result);
