@@ -95,11 +95,17 @@
                     <img class="activator" src="{{ previewUrl }}">
                     {{/isPhoto}}
                     {{#isAudio}}
-                    <video controls poster="{{ previewUrl }}" width="412" height="180">
+                        <video controls poster="{{ previewUrl }}" width="412" height="180">
                           <source src="{{ mediaUrl }}" type="audio/mpeg">
                           Your browser doesn't support HTML5 video tag.
                         </video>
                     {{/isAudio}}
+                    {{#isVideo}}
+                        <video controls poster="{{ previewUrl }}" width="412" height="180" name=media>
+                        <source src="{{ mediaUrl }}" type="video/mp4">
+                          Your browser doesn't support HTML5 video tag.
+                        </video>
+                    {{/isVideo}}
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">{{ commonName }}<i class="material-icons right">more_vert</i></span>

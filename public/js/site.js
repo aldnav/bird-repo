@@ -75,6 +75,7 @@ function fetchRenderMCL() {
             }
             dataObj.isAudio = dataObj.mediaType === 'Audio';
             dataObj.isPhoto = dataObj.mediaType === 'Photo';
+            dataObj.isVideo = dataObj.mediaType === 'Video';
             var template = null;
             var rendered = null;
             template = $('#mcl-card').html();
