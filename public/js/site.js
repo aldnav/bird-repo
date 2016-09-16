@@ -63,7 +63,7 @@ socket.on('search:results', function(data) {
 /**
  * Fetches from the mclResults and renders template
  */
-function fetchRenderMCL() {
+function fetchRenderMCL(callback) {
     if (mclResults && mclResults.count > 0 && loaded < mclResults.count &&
         loaded < maxCount) {
         var hasMaxed = false;
@@ -90,6 +90,9 @@ function fetchRenderMCL() {
             $('#load-more-btn').removeClass('hide disabled').show();
         } else {
             $('#load-more-btn').hide();
+        }
+        if (typeof callback === 'function') {
+            callback();
         }
     } else {
         $('#load-more-btn').hide();
