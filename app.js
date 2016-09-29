@@ -12,14 +12,20 @@ app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, './public/templates', 'index.html'));
 });
 
-var port = 3000;
-server.listen(port, function() {
+var port = process.env.PORT || 8080;
+var ip = process.env.IP || '0.0.0.0';
+server.listen(port, ip, function() {
     console.log('Listening on port ' + port + '...');
 });
 
 io.on('connection', function (socket) {
     socket.emit('h4ndsh4k3', {message: 'ACK RCVD'});
     socket.on('search', function (data) {
+        /**
+        * When searching, do the wiki search for. Assume there is at least
+        * an article or some sort. Then, search from the MCL library.
+        * The MCL will give us the media data (images, videos, audios).
+        */
         var keyword = data.keyword;
         library.wikiSearch(keyword, 'html', function(results) {
             socket.emit('search:results', results);
