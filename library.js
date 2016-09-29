@@ -16,6 +16,8 @@ function libSearch(keyword, mediaType, callback) {
         mediaType = null;
     }
     var kw = keyword ? keyword : 'king penguin';
+    // Let's be gentle with our request. Limit it to some count and
+    // sort by popularity (rating).
     var query = {'q': kw, 'count': 120, 'sort': 'rating_desc'};
     if (mediaType && typeof mediaType !== 'undefined' &&
         (mediaType === 'Audio' || mediaType === 'Video')) {
@@ -62,12 +64,15 @@ function wikiSearch(keyword, format, callback) {
         var hasError = false;
         var $;
         try {
+            // see if we have a document
             $ = cheerio.load(obj.parse.text['*']);
         } catch (e) {
             hasError = true;
         }
         var result = {library: 'wikipedia'};
         if (!hasError) {
+            // Get content before toc. Most likely will give us
+            // the summary.
             if (format === 'html') {
                 result.result = $.html($('#toc').prevAll());
             } else {
