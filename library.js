@@ -29,7 +29,7 @@ function libSearch(keyword, mediaType, callback) {
         method: 'GET'
     }, function(error, response, body) {
         if (error) {
-            console.log(error);
+            console.error(error);
             return;
         }
         var obj = JSON.parse(body);
